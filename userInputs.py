@@ -32,6 +32,7 @@ def predict_price(user_input):
     # Convert user input to DataFrame for prediction
     user_input_df = pd.DataFrame([user_input_full])
 
+
     # Make prediction
     predicted_price = rf_model.predict(user_input_df)
     return predicted_price[0]
@@ -67,18 +68,17 @@ heading.grid(row=0, columnspan=2, pady=10)  # Changed to grid()
 # Create a dictionary to hold entry widgets
 entries = {}
 
-# Create labels and entry fields for each feature with better naming
 feature_labels = {
-    "feature1": "Square Footage (in sqft):",
-    "feature2": "Number of Bedrooms:",
-    "feature3": "Number of Bathrooms:",
-    "feature4": "Lot Size (in acres):",
-    "feature5": "Year Built:",
-    "feature6": "Garage Size (in cars):",
-    "feature7": "Location Rating (1-10):",
-    "feature8": "Walkability Score (1-10):",
-    "feature9": "Nearby School Rating (1-10):",
-    "feature10": "HOA Fees (monthly):",
+    "Overall Qual": "Overall Quality (1-10):",
+    "Gr Liv Area": "Ground Living Area (sqft):",
+    "1st Flr SF": "1st Floor Area (sqft):",
+    "Total Bsmt SF": "Total Basement Area (sqft):",
+    "BsmtFin SF 1": "Finished Basement Area (sqft):",
+    "2nd Flr SF": "2nd Floor Area (sqft):",
+    "Full Bath": "Number of Full Bathrooms:",
+    "Garage Cars": "Number of Garage Cars:",
+    "Lot Area": "Lot Area (sqft):",
+    "Garage Area": "Garage Area (sqft):",
 }
 
 # Dynamically generate the input fields based on the top features
@@ -90,6 +90,11 @@ for idx, feature in enumerate(top_features):
     entry = tk.Entry(root, font=("Helvetica", 12))
     entry.grid(row=idx + 1, column=1, padx=10, pady=5)
     entries[feature] = entry
+
+print("Creating input fields with the following features:")
+for feature in top_features:
+    label_text = feature_labels.get(feature, f"Enter value for {feature}:")
+    print(f"{feature}: {label_text}")
 
 # Create the submit button
 submit_button = tk.Button(root, text="Submit", command=submit, font=("Helvetica", 12, "bold"), bg="#4CAF50", fg="white")
