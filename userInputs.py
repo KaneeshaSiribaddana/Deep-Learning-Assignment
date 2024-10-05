@@ -26,21 +26,14 @@ def main():
     model_path = 'random_forest_model.joblib'
     rf_model = load_model(model_path)
 
-    # Get the full feature names from the model
-    all_features = rf_model.feature_names_in_
-
     # Get the top 10 features from the model
     top_features, top_indices = get_top_n_features(rf_model, n=10)
 
     # Get user input only for the top features
     user_input = get_user_input(top_features)
 
-    # Create a dictionary for all features, using user input and default values for missing features
-    user_input_full = {feature: 0.0 for feature in all_features}  # Default all to 0
-    user_input_full.update(user_input)  # Update with user input
-
     # Convert user input to DataFrame for prediction
-    user_input_df = pd.DataFrame([user_input_full])
+    user_input_df = pd.DataFrame([user_input])
 
     # Make prediction
     predicted_price = rf_model.predict(user_input_df)
