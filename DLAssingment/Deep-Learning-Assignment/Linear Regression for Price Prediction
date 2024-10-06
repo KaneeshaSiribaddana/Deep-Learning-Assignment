@@ -1,0 +1,4 @@
+Linear Regression for Price Prediction
+Objective: Predict the final selling price of houses based on various features.
+Task: Direct prediction of house prices.
+Features Used: Square footage, number of bedrooms, location, etc.
